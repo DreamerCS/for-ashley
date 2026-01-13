@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泡芙心情按钮 - 给Ashley的21岁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff 0%, #fff5f7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .birthday-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #a8d8ff 0%, #ffb6d9 100%);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #5c6bc0;
+            font-size: 1rem;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(92, 107, 192, 0.15);
+            border: 2px solid #ffd9e9;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 40px 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border: 6px solid #e8f4ff;
+        }
+        
+        .corner-decoration {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.1;
+        }
+        
+        .corner-decoration:nth-child(1) { top: 15px; left: 15px; }
+        .corner-decoration:nth-child(2) { top: 15px; right: 15px; }
+        .corner-decoration:nth-child(3) { bottom: 15px; left: 15px; }
+        .corner-decoration:nth-child(4) { bottom: 15px; right: 15px; }
+        
+        .title {
+            color: #5c6bc0;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .title-accent {
+            color: #ff7eb6;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            color: #78909c;
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+        
+        .birthday-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #fff5f9 100%);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 0 auto 35px;
+            max-width: 700px;
+            border-left: 5px solid #5c6bc0;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .birthday-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #5c6bc0, #ff7eb6);
+        }
+        
+        .birthday-card h3 {
+            color: #5c6bc0;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .birthday-card h3::before {
+            content: '🎂';
+            font-size: 1.2rem;
+        }
+        
+        .birthday-card p {
+            color: #546e7a;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .birthday-card .signature {
+            text-align: right;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .puff-container {
+            position: relative;
+            margin: 30px auto;
+            width: 260px;
+            height: 260px;
+        }
+        
+        .puff-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #c2e0ff;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #fafafa;
+            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.15);
+        }
+        
+        .puff-photo:hover {
+            transform: scale(1.03);
+            border-color: #a8d8ff;
+            box-shadow: 0 15px 35px rgba(92, 107, 192, 0.25);
+        }
+        
+        .puff-photo:active {
+            transform: scale(0.98);
+        }
+        
+        .name-tag {
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
+            z-index: 2;
+            border: 2px solid white;
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #f8fbff 100%);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 40px auto 30px;
+            max-width: 700px;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d1e9ff;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.1);
+        }
+        
+        .message {
+            font-size: 1.7rem;
+            color: #455a64;
+            font-weight: 500;
+            line-height: 1.5;
+            padding: 10px;
+            transition: all 0.5s ease;
+            max-width: 100%;
+            text-align: center;
+        }
+        
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
+            border: none;
+            border-radius: 14px;
+            padding: 16px 30px;
+            font-size: 1.1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(92, 107, 192, 0.25);
+            min-width: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(92, 107, 192, 0.35);
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff9ec5 0%, #ff7eb6 100%);
+            box-shadow: 0 6px 15px rgba(255, 126, 182, 0.25);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 10px 22px rgba(255, 126, 182, 0.35);
+        }
+        
+        .btn-tertiary {
+            background: linear-gradient(135deg, #80deea 0%, #4dd0e1 100%);
+            box-shadow: 0 6px 15px rgba(77, 208, 225, 0.25);
+        }
+        
+        .btn-tertiary:hover {
+            box-shadow: 0 10px 22px rgba(77, 208, 225, 0.35);
+        }
+        
+        .stats {
+            margin-top: 35px;
+            color: #78909c;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            background: rgba(236, 239, 241, 0.7);
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .counter {
+            font-weight: bold;
+            color: #5c6bc0;
+            font-size: 1.1rem;
+        }
+        
+        .floating-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #bbdefb;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 8s infinite linear;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .puff-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .message {
+                font-size: 1.4rem;
+            }
+            
+            .btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+                min-width: 140px;
+            }
+            
+            .controls {
+                gap: 15px;
+            }
+            
+            .birthday-card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .message {
+                font-size: 1.3rem;
+            }
+            
+            .birthday-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .birthday-card p {
+                font-size: 1rem;
+            }
+        }
+        
+        .simple-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff9ec5;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .paw-print {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.07;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-badge">21st 🎂</div>
+    
+    <div class="floating-dot" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="floating-dot" style="top: 20%; right: 8%; animation-delay: 1s;"></div>
+    <div class="floating-dot" style="bottom: 15%; left: 10%; animation-delay: 2s;"></div>
+    <div class="floating-dot" style="bottom: 25%; right: 12%; animation-delay: 3s;"></div>
+    
+    <div class="paw-print" style="top: 15%; left: 8%;">🐾</div>
+    <div class="paw-print" style="top: 25%; right: 12%;">🐾</div>
+    <div class="paw-print" style="bottom: 20%; left: 15%;">🐾</div>
+    <div class="paw-print" style="bottom: 30%; right: 10%;">🐾</div>
+    
+    <div class="corner-decoration">^^</div>
+    <div class="corner-decoration">21</div>
+    <div class="corner-decoration">🎂</div>
+    <div class="corner-decoration">^^</div>
+    
+    <div class="container">
+        <h1 class="title">泡芙<span class="title-accent">心情按钮</span></h1>
+        <p class="subtitle">给Ashley的21岁生日</p>
+        
+        <!-- 生日祝福卡 -->
+        <div class="birthday-card">
+            <h3>给Ashley</h3>
+            <p>21岁生日快乐！🎂</p>
+            <p>泡芙让我转告你：新的一岁，愿你更加勇敢和自信，按照自己的节奏前行就好。</p>
+            <p>这个小小的心情按钮里藏了114句泡芙的悄悄话，对应1月14日你的生日。希望它能像泡芙一样，在你需要的时候给你一点小小的陪伴。</p>
+            <p>不用回复，不用有压力，就让它安静地待在你的浏览器里，随时听候差遣 ^^</p>
+            <div class="signature">—— 泡芙 & Hesper</div>
+        </div>
+        
+        <!-- 狗狗照片区域 -->
+        <div class="puff-container">
+            <img src="puff.jpg" alt="泡芙" class="puff-photo" id="puffBtn">
+            <div class="name-tag">泡芙 🐶</div>
+        </div>
+        
+        <!-- 消息显示区域 -->
+        <div class="message-box">
+            <div class="message" id="message">点击泡芙的照片，听听他想说什么 ^^</div>
+        </div>
+        
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button class="btn" id="moodBtn">泡芙心情</button>
+            <button class="btn btn-secondary" id="reminderBtn">温馨提醒</button>
+            <button class="btn btn-tertiary" id="encourageBtn">鼓励一下</button>
+        </div>
+        
+        <!-- 统计信息 -->
+        <div class="stats">
+            已接收 <span class="counter" id="count">0</span> 次泡芙关怀
+        </div>
+    </div>
+
+    <script>
+        // 泡芙的114句话
+        const puffLines = {
+            mood: [
+                "泡芙说：今天阳光不错，去窗边站一会儿吧 ☀️",
+                "泡芙提醒：站起来活动一下，我们一起伸懒腰 ^^",
+                "泡芙建议：闭上眼睛深呼吸三次 🌿",
+                "泡芙批准：可以吃个小零食补充能量啦 🍪",
+                "泡芙发现：你的植物该喝水了，顺便给自己也倒杯水 💧",
+                "泡芙邀请：陪我玩5分钟，然后我们一起工作 🎾",
+                "泡芙觉得：你需要一首好听的音乐 🎵 ^^",
+                "泡芙观察：外面的云很漂亮，看一眼天空吧 ☁️",
+                "泡芙提议：泡一杯热饮，先把自己安顿好 🍵",
+                "泡芙小声说：把通知关掉十分钟，世界会更安静 🔕",
+                "泡芙建议：放松肩膀，别一直顶着 ^^",
+                "泡芙批准：去洗把脸，像重启一下 🚿",
+                "泡芙说：写下你今天最想完成的一件小事就好 📝",
+                "泡芙建议：现在先选「最简单的开始」 👣",
+                "泡芙邀请：下楼走两分钟，看看树 🌳 ^^",
+                "泡芙提醒：感受一下冷空气，脑子会清一点 ❄️",
+                "泡芙听见：如果在下雨，就听一会儿雨声 🌧️",
+                "泡芙观察：夕阳很会安慰人，去看一眼吧 🌇",
+                "泡芙批准：点个小香薰/蜡烛 🕯️",
+                "泡芙建议：清理桌面一个角落就够了 🗂️ ^^",
+                "泡芙提醒：换个坐姿，脖子会谢谢你 🪑",
+                "泡芙提议：把手机放远一点点 📵",
+                "泡芙说：今天可以开「低功耗模式」🔋",
+                "泡芙建议：把目标缩小到「下一步」就行 ➡️ ^^",
+                "泡芙提醒：学习前先把水放旁边 🧊",
+                "泡芙说：转转手腕，松一下紧绷 ✋",
+                "泡芙邀请：看一张你喜欢的风景照片 🏔️",
+                "泡芙说：今天平淡也很好 🌾 ^^",
+                "泡芙提醒：看看远处，眼睛放松一下 👀",
+                "泡芙建议：开一盏暖光小灯 💡",
+                "泡芙批准：把杯子洗掉 🧼",
+                "泡芙听见：如果有鸟叫，停一秒听听 🐦 ^^",
+                "泡芙提议：出去买杯咖啡/热巧 ☕"
+            ],
+
+            reminder: [
+                "今天的泡芙提醒：去喝一杯温水吧 💦 ^^",
+                "泡芙陪你散步15分钟 🌳",
+                "泡芙批准你提前睡觉，今天已经很棒了 🌙",
+                "泡芙建议：整理一下桌面 🗃️",
+                "泡芙提醒：该让眼睛休息一下了 👀 ^^",
+                "泡芙说：给自己一个拥抱，你做得很好 🤗",
+                "泡芙发现：手机电量有点低，也给自己充充电吧 🔋",
+                "泡芙建议：写下一件今天开心的小事 📝",
+                "泡芙提醒：待办别写太多，最多三条就好 ✅ ^^",
+                "泡芙建议：开一个25分钟小计时器 ⏳",
+                "泡芙提醒：手腕和肩颈也要休息一下 🧘",
+                "泡芙批准：吃点水果/坚果 🍎",
+                "泡芙建议：如果困，就眯20分钟 😴 ^^",
+                "泡芙提醒：关屏5分钟，让大脑透口气 📴",
+                "泡芙建议：把文件/笔记随手存一下 💾",
+                "泡芙提醒：只回一封最重要的邮件就够了 📧 ^^",
+                "泡芙建议：把脏衣服先集中到一个地方就行 🧺",
+                "泡芙提醒：擦点护手霜 🧴",
+                "泡芙建议：选项太多时，先删掉两个不想要的 ✂️ ^^",
+                "泡芙提醒：做决定给自己3分钟时限 ⌛",
+                "泡芙建议：水杯放在视线里 🥤",
+                "泡芙提醒：别憋着，去上个厕所 🚻 ^^",
+                "泡芙建议：开窗通风两分钟 🌬️",
+                "泡芙提醒：出门前把钥匙证件摸一遍 🔑",
+                "泡芙建议：睡前别刷短视频 🌙 ^^",
+                "泡芙提醒：把明天要穿的衣服先放好 👔",
+                "泡芙建议：把一个问题写下来，明天再想 🗒️",
+                "泡芙提醒：今天学到的一点点，记一句就行 📌 ^^",
+                "泡芙建议：学习累了就换10分钟轻的内容 🔄",
+                "泡芙提醒：把多余的标签页关掉 🧠",
+                "泡芙建议：电脑别直接合上，先保存 🖥️ ^^",
+                "泡芙提醒：吃一顿正经饭 🍚",
+                "泡芙建议：休息就休息一首歌的时间 🎧",
+                "泡芙提醒：走楼梯一层也算运动 🧗 ^^"
+            ],
+
+            encourage: [
+                "泡芙摇尾巴：今天也推进一点点了 🎉 ^^",
+                "泡芙蹭蹭你：不需要完美，完成就很了不起 ✨",
+                "泡芙叼来玩具：累的时候可以停一下，没关系 🐾",
+                "泡芙看着你：你一直很稳，这就是强大 🌟 ^^",
+                "泡芙点点头：按自己的节奏来就好 🕰️",
+                "泡芙递爪子：我在这里陪着你呢 🤝",
+                "泡芙转圈圈：你值得所有温柔对待 🌸 ^^",
+                "泡芙盖章：今天做到这一步，就已经很好了 ✅",
+                "泡芙小声说：小进步会复利 📈",
+                "泡芙提醒：选错也没关系，你随时能改路线 🧭 ^^",
+                "泡芙眨眨眼：你会越来越会做选择的 🪄",
+                "泡芙说：别跟别人比，跟昨天的自己比一点点 🌱",
+                "泡芙觉得：你认真生活的样子很可贵 💫 ^^",
+                "泡芙说：慢热的人往往更走得远 🏃‍♀️",
+                "泡芙夸夸：你有边界感，这很高级 🛡️",
+                "泡芙说：你既温柔又清醒 🌙 ^^",
+                "泡芙提醒：今天学到一点点，就是赚到 🪙",
+                "泡芙点头：不想社交也没事 🫧",
+                "泡芙说：你不必解释，你的选择很合理 🧩 ^^",
+                "泡芙提醒：把难事拆小 🧱",
+                "泡芙说：你在训练自己 🏋️",
+                "泡芙说：你会越来越自由 🕊️ ^^",
+                "泡芙望向窗外：好天气会来的 🌤️",
+                "泡芙说：你一直很可靠 🧡",
+                "泡芙提醒：你的温柔会被温柔接住 🌷 ^^",
+                "泡芙说：今天的努力不会丢 🧳",
+                "泡芙认真脸：你是长期主义玩家 🧠",
+                "泡芙说：别急，路会越走越宽 🛣️ ^^",
+                "泡芙提醒：允许自己松一点 🍃",
+                "泡芙说：你值得被好好对待 🌼",
+                "泡芙点点头：能把日子过稳，本身就是实力 🧱 ^^",
+                "泡芙说：你会越来越有底气 🪨",
+                "泡芙提醒：今天卡住就明天再试 🔁",
+                "泡芙说：你不是主角也没关系，你依然重要 🌟 ^^",
+                "泡芙小声说：你在变好 🤍",
+                "泡芙说：想去的地方，会被你一步步走成现实 🗺️",
+                "泡芙眨眼：你已经在路上了 👣 ^^",
+                "泡芙摇尾巴：祝你今天也轻轻赢一次 🏁"
+            ]
+        };
+
+        // 初始化变量
+        let usedMessages = new Set();
+        let clickCount = 0;
+        let isFirstVisit = true;
+
+        // DOM元素
+        const puffBtn = document.getElementById('puffBtn');
+        const moodBtn = document.getElementById('moodBtn');
+        const reminderBtn = document.getElementById('reminderBtn');
+        const encourageBtn = document.getElementById('encourageBtn');
+        const messageEl = document.getElementById('message');
+        const countEl = document.getElementById('count');
+
+        // 随机选择一条消息
+        function getRandomMessage(type) {
+            const availableMsgs = puffLines[type].filter(msg => !usedMessages.has(msg));
+            
+            if (availableMsgs.length === 0) {
+                usedMessages.clear();
+                return puffLines[type][Math.floor(Math.random() * puffLines[type].length)];
+            }
+            
+            const msg = availableMsgs[Math.floor(Math.random() * availableMsgs.length)];
+            usedMessages.add(msg);
+            return msg;
+        }
+
+        // 显示消息
+        function showMessage(message) {
+            messageEl.style.opacity = '0';
+            messageEl.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                messageEl.textContent = message;
+                messageEl.style.opacity = '1';
+                messageEl.style.transform = 'translateY(0)';
+                
+                // 偶尔添加小心心
+                if (Math.random() < 0.3) {
+                    createSimpleHearts();
+                }
+            }, 200);
+            
+            // 更新点击次数
+            clickCount++;
+            countEl.textContent = clickCount;
+            
+            // 保存到localStorage
+            localStorage.setItem('puff_clicks', clickCount);
+        }
+
+        // 创建小心心动画
+        function createSimpleHearts() {
+            const container = document.querySelector('.puff-container');
+            
+            for (let i = 0; i < 3; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'simple-heart';
+                heart.innerHTML = '💗';
+                heart.style.left = Math.random() * 80 + 10 + '%';
+                heart.style.top = Math.random() * 80 + 10 + '%';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                
+                container.appendChild(heart);
+                
+                // 动画
+                setTimeout(() => {
+                    heart.style.opacity = '0.8';
+                    heart.style.transform = `translateY(-${40 + Math.random() * 20}px)`;
+                }, 10);
+                
+                // 移除元素
+                setTimeout(() => {
+                    heart.remove();
+                }, 1200);
+            }
+        }
+
+        // 事件监听
+        puffBtn.addEventListener('click', () => {
+            const allTypes = ['mood', 'reminder', 'encourage'];
+            const randomType = allTypes[Math.floor(Math.random() * allTypes.length)];
+            showMessage(getRandomMessage(randomType));
+            
+            // 泡芙照片动画
+            puffBtn.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                puffBtn.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        moodBtn.addEventListener('click', () => showMessage(getRandomMessage('mood')));
+        reminderBtn.addEventListener('click', () => showMessage(getRandomMessage('reminder')));
+        encourageBtn.addEventListener('click', () => showMessage(getRandomMessage('encourage')));
+
+        // 初始化
+        function initialize() {
+            const savedClicks = localStorage.getItem('puff_clicks');
+            if (savedClicks) {
+                clickCount = parseInt(savedClicks);
+                countEl.textContent = clickCount;
+                isFirstVisit = false;
+            }
+            
+            // 显示欢迎语
+            showWelcomeMessage();
+        }
+
+        // 显示欢迎语
+        function showWelcomeMessage() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            
+            const specialGreetings = [
+                "Ashley，21岁生日快乐！泡芙说今天要对你特别一点 ^^",
+                "21岁快乐！泡芙准备了114句悄悄话给你 🎂",
+                "生日快乐！泡芙和我（Hesper）祝你新的一岁轻盈自在 ^^",
+                "21岁第一天，泡芙会一直在这里陪着你 🐶"
+            ];
+            
+            if (isFirstVisit) {
+                // 第一次访问显示特别欢迎语
+                const randomSpecial = specialGreetings[Math.floor(Math.random() * specialGreetings.length)];
+                greeting = randomSpecial;
+            } else {
+                // 后续访问显示时间相关的问候
+                if (hour < 12) {
+                    greeting = "早上好！泡芙提醒你：新的一天从一杯温水开始 ☀️ ^^";
+                } else if (hour < 18) {
+                    greeting = "下午好！泡芙建议：休息一下眼睛吧 👀 ^^";
+                } else {
+                    greeting = "晚上好！泡芙批准：今天可以早点休息 🌙 ^^";
+                }
+            }
+            
+            messageEl.textContent = greeting;
+            
+            // 如果是第一次访问，3秒后显示操作提示
+            if (isFirstVisit) {
+                setTimeout(() => {
+                    messageEl.textContent = "点击泡芙的照片，听听他想说什么 ^^";
+                }, 4000);
+            }
+        }
+
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                puffBtn.click();
+            } else if (e.key === '1') {
+                moodBtn.click();
+            } else if (e.key === '2') {
+                reminderBtn.click();
+            } else if (e.key === '3') {
+                encourageBtn.click();
+            }
+        });
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', initialize);
+
+        // 处理图片加载错误
+        puffBtn.addEventListener('error', function() {
+            // 如果图片加载失败，显示默认的狗狗emoji
+            this.outerHTML = '<div class="puff-photo" id="puffBtn" style="display: flex; align-items: center; justify-content: center; font-size: 90px; background: #c2e0ff; color: #5c6bc0;">🐕</div>';
+            // 重新绑定事件
+            document.getElementById('puffBtn').addEventListener('click', puffBtn.click);
+        });
+        
+        // 21次点击特别消息
+        let specialCounter = 0;
+        const originalShowMessage = showMessage;
+        
+        function showMessageWithSpecial(message) {
+            specialCounter++;
+            
+            // 每21次点击显示一个特别消息
+            if (specialCounter % 21 === 0) {
+                const special21 = [
+                    "✨ 第21次点击！泡芙说：21岁会是很棒的一年 ^^",
+                    "✨ 21次了！Hesper祝你：21岁，更自由，更笃定",
+                    "✨ 第21次关怀！泡芙盖章：你正在成为你想成为的样子 ✅"
+                ];
+                const special = special21[Math.floor(Math.random() * special21.length)];
+                originalShowMessage(special);
+            } else {
+                originalShowMessage(message);
+            }
+        }
+        
+        // 覆盖原函数
+        showMessage = showMessageWithSpecial;
+    </script>
+</body>
+</html>
