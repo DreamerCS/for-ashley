@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>泡芙心情按钮 - 给Ashley的21岁</title>
+    <title>泡芙心情按钮 - 给Ashley的21岁 & 新年快乐</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
             align-items: center;
             padding: 20px;
             position: relative;
-            overflow-x: hidden;
+            overflow-x: auto;
         }
         
         .birthday-badge {
@@ -39,7 +39,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             text-align: center;
             background: rgba(255, 255, 255, 0.98);
@@ -82,6 +82,95 @@
             font-weight: 400;
         }
         
+        /* 新年卡片样式 */
+        .newyear-card {
+            background: linear-gradient(135deg, #fff2e0 0%, #ffe8f0 100%);
+            border-radius: 18px;
+            padding: 25px 30px;
+            margin: 0 auto 30px;
+            max-width: 750px;
+            border-left: 6px solid #ff7eb6;
+            border-right: 6px solid #a8d8ff;
+            text-align: left;
+            box-shadow: 0 10px 25px rgba(255, 126, 182, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: glow 3s infinite alternate;
+        }
+        
+        .newyear-card::before {
+            content: '🧧';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 40px;
+            opacity: 0.15;
+            transform: rotate(15deg);
+        }
+        
+        .newyear-card::after {
+            content: '🎊';
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 40px;
+            opacity: 0.15;
+            transform: rotate(-15deg);
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 10px 25px rgba(255, 126, 182, 0.15); }
+            100% { box-shadow: 0 15px 35px rgba(92, 107, 192, 0.25); }
+        }
+        
+        .newyear-card h2 {
+            color: #d44c7a;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            flex-wrap: wrap;
+        }
+        
+        .newyear-card h2 span {
+            font-size: 1.8rem;
+            background: #fff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+        
+        .newyear-card p {
+            color: #4a4a6a;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            padding-left: 10px;
+            border-left: 3px solid #ff9ec5;
+            padding-left: 15px;
+        }
+        
+        .newyear-card .signature {
+            text-align: right;
+            color: #8888b0;
+            font-style: italic;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            border-left: none;
+            padding-left: 0;
+        }
+        
+        .newyear-card .emoji-line {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 1.8rem;
+            opacity: 0.8;
+        }
+        
+        /* 生日祝福卡 */
         .birthday-card {
             background: linear-gradient(135deg, #f0f9ff 0%, #fff5f9 100%);
             border-radius: 18px;
@@ -335,6 +424,18 @@
             .birthday-card {
                 padding: 20px;
             }
+            
+            .newyear-card {
+                padding: 20px;
+            }
+            
+            .newyear-card h2 {
+                font-size: 1.6rem;
+            }
+            
+            .newyear-card p {
+                font-size: 1rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -359,6 +460,14 @@
             .birthday-card p {
                 font-size: 1rem;
             }
+            
+            .newyear-card h2 {
+                font-size: 1.4rem;
+            }
+            
+            .newyear-card p {
+                font-size: 0.95rem;
+            }
         }
         
         .simple-heart {
@@ -379,7 +488,7 @@
     </style>
 </head>
 <body>
-    <div class="birthday-badge">21st 🎂</div>
+    <div class="birthday-badge">21st 🎂 + 新年快乐 🎆</div>
     
     <div class="floating-dot" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
     <div class="floating-dot" style="top: 20%; right: 8%; animation-delay: 1s;"></div>
@@ -394,11 +503,23 @@
     <div class="corner-decoration">^^</div>
     <div class="corner-decoration">21</div>
     <div class="corner-decoration">🎂</div>
-    <div class="corner-decoration">^^</div>
+    <div class="corner-decoration">🧧</div>
     
     <div class="container">
         <h1 class="title">泡芙<span class="title-accent">心情按钮</span></h1>
-        <p class="subtitle">给Ashley的21岁生日</p>
+        <p class="subtitle">给Ashley的21岁 & 新年快乐</p>
+        
+        <!-- 新年祝福卡片 -->
+        <div class="newyear-card">
+            <h2>🧧 新年快乐，Ashley！ 马年大吉 <span>🐴</span></h2>
+            <p>祝你新的一年万事胜意、顺顺利利：继续吃到超多好吃的、打卡想去的餐厅；遇到很多很好的天气；也祝你考到一等！</p>
+            <p>更重要的是，去到你想去的地方！不管是旅行，还是你想要的任何 position。加油加油！</p>
+            <p>愿你每天都有很多很多好心情，身边都是来自朋友、家人、还有大自然的爱～ ^^</p>
+            <div class="signature">—— Hesper & 泡芙 🐶</div>
+            <div class="emoji-line">
+                <span>🧨</span> <span>🎆</span> <span>✨</span> <span>🧧</span> <span>🍊</span> <span>🐶</span> <span>🐴</span>
+            </div>
+        </div>
         
         <!-- 生日祝福卡 -->
         <div class="birthday-card">
@@ -666,10 +787,11 @@
             let greeting = '';
             
             const specialGreetings = [
-                "Ashley，21岁生日快乐！泡芙说今天要对你特别一点 ^^",
-                "21岁快乐！泡芙准备了114句悄悄话给你 🎂",
-                "生日快乐！泡芙和我（Hesper）祝你新的一岁轻盈自在 ^^",
-                "21岁第一天，泡芙会一直在这里陪着你 🐶"
+                "Ashley，新年快乐！泡芙祝你新的一年万事胜意 ^^",
+                "新年好！泡芙说今天要多吃点好吃的 🥟",
+                "新年快乐！泡芙和我（Hesper）祝你新的一岁轻盈自在 ^^",
+                "新年第一天，泡芙会一直在这里陪着你 🐶",
+                "马年大吉！泡芙祝你今年一马当先，心想事成 🐴"
             ];
             
             if (isFirstVisit) {
